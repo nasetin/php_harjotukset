@@ -7,7 +7,7 @@ declare(strict_types= 1);
 // PHP funktioiden nimeäminkäytäntö: kaikki pienellä ja _ sanojen välissä
 function is_input_empty(string $username, string $pass, string $email) {
     // Tarkistetaan onko jokin käyttäjän syöte tyhjä
-    if (empty($usernam) || empty($pass) || empty($email)) {
+    if (empty($username) || empty($pass) || empty($email)) {
         return true;
     } else {
         return false;
@@ -17,7 +17,7 @@ function is_input_empty(string $username, string $pass, string $email) {
 // Tarkistetaan jos käyttäjän syöttämä sähköposti ei ole validi "invalid"
 function is_email_invalid(string $email) {
     // Tarkistetaan onko käyttäjän syöttämä arvo hyväksyttäväsähköpostiosoite
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return true;
     } else {
         return false;

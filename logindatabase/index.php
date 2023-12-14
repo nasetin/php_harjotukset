@@ -1,5 +1,7 @@
 <?php
     require_once "includes/config_session.inc.php";
+    require_once "includes/signup_view.inc.php";
+    require_once "includes/login_view.inc.php";
 ?>
 
 <html lang="en">
@@ -10,21 +12,37 @@
     <link rel="stylesheet" href="">
 </head>
 <body>
-    <h3>Login</h3>
+    <?php output_username(); ?>
 
-    <form action="include/login.inc.php" method="post">
-        <input type="text" name ="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <button>Login</button>
-    </form>
+    <?php 
+    if(!isset($_SESSION["user_id"])) { ?>
+
+<h3>Login</h3>
+
+<form action="includes/login.inc.php" method="post">
+    <input type="text" name ="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+    <button>Login</button>
+</form>
+       <?php } ?>
+
+       <?php check_login_errors(); ?>
 
     <h3>Signup</h3>
 
-    <form action="include/signup.inc.php" method="post">
-        <input type="text" name="username" placeholder="Username">
+    <form action="includes/signup_inc.php" method="post">
+        <?php 
+            signup_inputs();
+        ?>
+        <!-- <input type="text" name="username" placeholder="Username">
         <input type="password" name="password" placeholder="Password">
-        <input type="text" name="email" placeholder="E-mail">
+        <input type="text" name="email" placeholder="E-mail"> -->
         <button>Signup</button>
     </form>
+
+    <?php
+        check_signup_errors();
+    ?>
+
 </body>
 </html>

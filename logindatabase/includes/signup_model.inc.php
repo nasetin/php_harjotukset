@@ -28,7 +28,7 @@ function get_email(object $pdo, string $email) {
     $query = "SELECT username FROM users WHERE email= :email";
 
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam("email", $email);
+    $stmt->bindParam(":email", $email);
 
     $stmt->execute();
 
@@ -52,9 +52,9 @@ function set_user(object $pdo, string $username, string $password, string $email
     // mikä meillä on tiedossa.
     $hashedpwd = password_hash($password, PASSWORD_BCRYPT, $options);
 
-    $stmt->bindParam("username", $username);
-    $stmt->bindParam("password", $hashedpwd);
-    $stmt->bindParam("email", $email);
+    $stmt->bindParam(":username", $username);
+    $stmt->bindParam(":password", $hashedpwd);
+    $stmt->bindParam(":email", $email);
 
     $stmt->execute();
 }
