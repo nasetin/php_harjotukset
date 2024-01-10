@@ -19,6 +19,9 @@
 // 5. Näytetään käyttöliittymässä, mitkä käyttäjät on poistettu
 //      a. tietokannasta pitää hakea sarake, jossa tieto poistosts "deleted_at"-sarake
 //      b. lisätään jokin tyyli riveille, joiden käyttällä "deleted_at" !=null
+//
+// 6. Lisätään käyttäjän palautus painike
+//      a. Lisätään valintarakkenne, jossa genetoidaan joko....
 
 // Tietokanta yhteyden koodit löytyy tästä tiedostosta
 require_once 'db_connection.inc.php'; // <- $pdo_conn
@@ -29,7 +32,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(isset($_POST['delete'])){
         // delete nappia on painettu
         $useridToDelete = $_POST["user_id"];
-        delete_user($pdo_conn, $useridToDelete);
+       $operationResult = delete_user($pdo_conn, $useridToDelete);
+    }
+}
+
+// Käyttäjän "palautus"
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(isset($_POST['restore'])){
+        // restore nappia on painettu
+        $useridToRestero = $_POST["user_id"];
+       $operationResult = restore_user($pdo_conn, $useridToRestero);
     }
 }
 // $queryString = "SELECT * FROM users" // Voi olla myös erillinen muuttuja SQL lauseelle
@@ -93,12 +105,22 @@ $users = $stmt->fetchALL(PDO::FETCH_ASSOC); // Tallennetaan data muuttujaan
         .deleted {
             background-color: #FFD2D2;
         }
+
+        .restore {
+            background-color: #8ced28;
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+
     </style>
 </head>
 <body>
 
         <main>
-            
+
+        <h3 <?php if(isset($operationResult) === false) { echo "class='hidden'"; } ?> > <?php if(isset($operationResult)) { echo $operationResult; } else { echo "hidden";} ?>  </h3>            
             <h2>User List</h2>
             
             <!-- Tähän taulukkoon generoidaan rivejä $users muuttujan datan perusteella -->
@@ -121,17 +143,26 @@ $users = $stmt->fetchALL(PDO::FETCH_ASSOC); // Tallennetaan data muuttujaan
                         <td><?= htmlspecialchars($user["Username"]) ?></td>
                         <td><?= htmlspecialchars($user["email"]) ?></td>
                         <td>  <!-- Action sarake -->
+
+                        <?php if($user['deleted_at'] === null): ?>
                         <!-- Poistetaan käyttäjä tällä sivulla -->
                         <form action="view_user.php" method ="post">
                             <input type="hidden" name="user_id" value="<?= $user["UserID"] ?>">
                             <button class="delete" name="delete" type="submit">Delete</button>
                             <!-- isset($_POST["delete"]) ja $_POST["user_id] -->
                         </form>
+
+                        <?php else: ?>
+                            <form action="view_user.php" method ="post">
+                            <input type="hidden" name="user_id" value="<?= $user["UserID"] ?>">
+                            <button class="restore" name="restore" type="submit">Restore</button>
+                        </form> 
+                        <?php endif; ?>
                         
                         <div class="padding"></div>
 
                         <!-- $_GET["userid"] -->
-                        <a href="edit_user.php?userid=<?= $user["UserID"] ?>">Edit</a>
+                        <a href="edit_user.php?UserID=<?= $user["UserID"] ?>">Edit</a>
                         
                     </td> <!-- Action sarake -->
                 </tr> <!-- user rivi päättyy -->
