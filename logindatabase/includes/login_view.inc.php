@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types= 1);
+declare(strict_types=1);
 
 function output_username() {
     if(isset($_SESSION["user_id"])) {
@@ -19,10 +19,10 @@ function check_login_errors() {
         foreach($errors as $error) {
             echo "<p>" . $error . "</p>";
         }
-        unset($_SESSION["errors_login"]); 
+
+        unset($_SESSION["errors_login"]);
     } else if (isset($_GET["login"]) && $_GET["login"] == "success") {
         echo "<br>";
         echo "<p class='form_success'>Login success!</p>";
     }
-
 }

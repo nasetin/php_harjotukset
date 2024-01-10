@@ -1,10 +1,10 @@
 <?php
 
-declare(strict_types= 1);
+declare(strict_types=1);
 
 // bool|array syntaksi hyväksyy argumenttinä joko boolean tai array datatyypit
-function is_username_wrong(bool |array $result) {
-    if ($result === false) {
+function is_username_wrong(bool|array $result) {
+    if ($result == false) {
         return true;
     } else {
         return false;

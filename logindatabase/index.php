@@ -8,35 +8,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
-    <link rel="stylesheet" href="">
 </head>
 <body>
     <?php output_username(); ?>
 
-    <?php 
-    if(!isset($_SESSION["user_id"])) { ?>
+    <?php
+    if(!isset($_SESSION["user_id"])) {?>
+    <h3>Login</h3>
 
-<h3>Login</h3>
+    <form action="includes/login.inc.php" method="post">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <button>Login</button>
+    </form>
 
-<form action="includes/login.inc.php" method="post">
-    <input type="text" name ="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
-    <button>Login</button>
-</form>
-       <?php } ?>
+    <?php } ?>
 
-       <?php check_login_errors(); ?>
+    <?php
+        check_login_errors();
+    ?>
 
     <h3>Signup</h3>
 
     <form action="includes/signup_inc.php" method="post">
-        <?php 
-            signup_inputs();
+        <?php
+            signup_inputs()
         ?>
-        <!-- <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="text" name="email" placeholder="E-mail"> -->
         <button>Signup</button>
     </form>
 

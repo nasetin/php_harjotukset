@@ -4,9 +4,9 @@
 
 declare(strict_types= 1);
 
-// PHP funktioiden nimeäminkäytäntö: kaikki pienellä ja _ sanojen välissä
+// PHP funktioiden nimeämiskäytäntö: kaikki pienellä ja _ sanojen välissä
 function is_input_empty(string $username, string $pass, string $email) {
-    // Tarkistetaan onko jokin käyttäjän syöte tyhjä
+    // Tarkistetaan onko jokin käytäjän syöte tyhjä
     if (empty($username) || empty($pass) || empty($email)) {
         return true;
     } else {
@@ -16,7 +16,7 @@ function is_input_empty(string $username, string $pass, string $email) {
 
 // Tarkistetaan jos käyttäjän syöttämä sähköposti ei ole validi "invalid"
 function is_email_invalid(string $email) {
-    // Tarkistetaan onko käyttäjän syöttämä arvo hyväksyttäväsähköpostiosoite
+    // Tarkistetaan onko käyttäjän syöttämä arvo hyväksyttävä sähköpostiosoite
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return true;
     } else {
@@ -35,7 +35,7 @@ function is_username_taken(object $pdo_conn, string $username) {
 // Kirjoita toiminnallisuus: Käyttäen modelia apuna, funktio tarkastaa onko email
 // jo käytössä
 function is_email_registered(object $pdo_conn, string $email) {
-    if(get_email($pdo_conn, $email)) {
+    if (get_email($pdo_conn, $email)) {
         return true;
     } else {
         return false;
