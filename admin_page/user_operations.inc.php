@@ -57,3 +57,13 @@ function getUserDetails($pdo, $userid) {
     }
 
 } // getUserDetails
+
+//                                    Taulukossa uusi data
+function updateUserDetails($pdo, $userId, $newData) {
+    $stmt = $pdo->prepare("UPDATE users SET Username = :username, Email = :email WHERE UserID = :user_id");
+    $stmt->bindParam(':username', $newData['Username'], PDO::PARAM_STR);
+    $stmt->bindParam(':email', $newData['Email'], PDO::PARAM_STR);
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+
+    $stmt->execute();
+} // UpdateUserDetails
