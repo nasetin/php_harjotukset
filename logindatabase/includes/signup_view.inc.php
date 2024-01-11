@@ -25,7 +25,7 @@ function check_signup_errors() {
 function signup_inputs() {
     if (isset($_SESSION["signup_data"]["username"]) &&
         isset($_SESSION["errors_signup"]["username_taken"]) === false) {
-            echo '<input type="text" name="username" placeholder="Username">
+            echo '<input type="text" name="username" placeholder="Username"
              value="'.htmlspecialchars($_SESSION["signup_data"]["username"]).'">';
     } else {
         echo '<input type="text" name="username" placeholder="Username">';
@@ -36,7 +36,7 @@ function signup_inputs() {
     if (isset($_SESSION["signup_data"]["email"]) &&
         isset($_SESSION["errors_signup"]["email_used"]) === false &&
         isset($_SESSION["errors_signup"]["invalid_email"]) === false) {
-            echo '<input type="text" name="email" placeholder="E-Mail">
+            echo '<input type="text" name="email" placeholder="E-Mail"
              value="'. htmlspecialchars($_SESSION["signup_data"]["email"]) .'">';
     } else {
         echo '<input type="text" name="email" placeholder="E-Mail">';

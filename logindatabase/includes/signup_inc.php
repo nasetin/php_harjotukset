@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // ERROR HANDLERS
         $errors = []; // Talennetaan virheet key -> value pareina
 
-        if (is_input_empty($username, $password, $email)) {
+        if (is_input_empty($username, $password, $email) === true) {
             $errors["empty_input"] = "Fill in all fields!";
         }
         if (is_email_invalid($email)) {
