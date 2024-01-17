@@ -1,0 +1,8 @@
+# Tässä tiedostossa voidaan määritellä mitä kansioita ja tiedostoja
+# Git ei tallenna
+secrets.php
+
+# yleensä on vain yksi .gitignore tiedosto repon juuressa
+# joten pitää laittaa koko polku tiedostoon
+
+file_upload/secrets.php

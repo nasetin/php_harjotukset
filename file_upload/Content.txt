@@ -1,0 +1,5 @@
+Tässä kansiossa:
+
+1. ENV_VARIABLE ja .gitignore
+2. sähköpostin lähetys
+3. file upload
